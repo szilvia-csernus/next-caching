@@ -13,7 +13,7 @@ import { unstable_noStore } from 'next/cache'; // not yet ready for production
 // export const dynamic = 'force-static'; // it will cache the request and serve it from the cache only, never revalidate
 // All these constants are used throughout the file.
 
-export default function MessagesPage() {
+export default async function MessagesPage() {
   // unstable_noStore(); // component-specific setting, behaviour as dynamic = 'force-dynamic'
   
   // This fetch function reaches out to the backend API to fetch the messages (async needed for MessagesPage)
@@ -30,7 +30,7 @@ export default function MessagesPage() {
   // const messages = await response.json();
 
   // This function fetches the messages directly from the database
-  const messages = getMessages()
+  const messages = await getMessages()
 
   if (!messages || messages.length === 0) {
     return <p>No messages found</p>;

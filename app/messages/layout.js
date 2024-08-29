@@ -1,6 +1,6 @@
 import { getMessages } from "@/lib/messages";
 
-export default function MessagesLayout({ children }) {
+export default async function MessagesLayout({ children }) {
   // This fetch function reaches out to the backend API to fetch the messages (async needed for PagesLaayout)
   // const response = await fetch('http://localhost:8080/messages', {
   //   // headers: {
@@ -13,7 +13,7 @@ export default function MessagesLayout({ children }) {
   // const messages = await response.json();
 
   // This function fetches the messages directly from the database
-  const messages = getMessages();
+  const messages = await getMessages();
   const totalMessages = messages.length;
 
   return (
