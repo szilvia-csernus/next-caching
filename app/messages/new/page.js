@@ -9,7 +9,7 @@ export default function NewMessagePage() {
 
     const message = formData.get('message');
     addMessage(message);
-    revalidatePath('/messages', 'layout'); // with the 'layout' setting, it will revalidate all the nested pages
+    // revalidatePath('/messages', 'layout'); // with the 'layout' setting, it will revalidate all the nested pages
     // revalidatePath('/', 'layout'); // this setting would revalidate all pages that are using the layout
     // revalidateTag('my-tag-name'); // the tags are used in the fetch requests body's next object like { next: {tags: ['my-tag-name']} }
     redirect('/messages');

@@ -1,4 +1,5 @@
 import Messages from '@/components/messages';
+import { getMessages } from '@/lib/messages';
 
 import { unstable_noStore } from 'next/cache'; // not yet ready for production
 
@@ -12,19 +13,24 @@ import { unstable_noStore } from 'next/cache'; // not yet ready for production
 // export const dynamic = 'force-static'; // it will cache the request and serve it from the cache only, never revalidate
 // All these constants are used throughout the file.
 
-export default async function MessagesPage() {
-  unstable_noStore(); // component-specific setting, behaviour as dynamic = 'force-dynamic'
-  const response = await fetch("http://localhost:8080/messages", {
-    // headers: {
-    //   'X-ID': 'page', // this ID will be logged in the backend to observe the cache behaviour
-    // },
-    // These are request-specific settings, they will override the component-specific settings
-    // next: {
-    //   revalidate: 5 // seconds
-    // },
-    // cache: 'no-store' // this is telling nextjs not to cache this request
-  });
-  const messages = await response.json();
+export default function MessagesPage() {
+  // unstable_noStore(); // component-specific setting, behaviour as dynamic = 'force-dynamic'
+  
+  // This fetch function reaches out to the backend API to fetch the messages (async needed for MessagesPage)
+  // const response = await fetch("http://localhost:8080/messages", {
+  //   // headers: {
+  //   //   'X-ID': 'page', // this ID will be logged in the backend to observe the cache behaviour
+  //   // },
+  //   // These are request-specific settings, they will override the component-specific settings
+  //   // next: {
+  //   //   revalidate: 5 // seconds
+  //   // },
+  //   // cache: 'no-store' // this is telling nextjs not to cache this request
+  // });
+  // const messages = await response.json();
+
+  // This function fetches the messages directly from the database
+  const messages = getMessages()
 
   if (!messages || messages.length === 0) {
     return <p>No messages found</p>;
