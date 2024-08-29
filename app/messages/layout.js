@@ -1,7 +1,10 @@
 export default async function MessagesLayout({ children }) {
   const response = await fetch('http://localhost:8080/messages', {
     // headers: {
-    //   'X-ID': 'layout',
+    //   'X-ID': 'layout', // this ID will be logged in the backend to observe the cache behaviour
+    // },
+    // next: {
+    //   tags: ['my-tag-name'], // this tag is used by the revalidateTag function
     // },
   });
   const messages = await response.json();
